@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<process name="{{name}}" xmlns="uri:falcon:process:0.1">
+    <clusters>
+        {% for cluster in clusters %}
+            <cluster name="{{cluster.name}}">
+                <validity start="{{cluster.start}}" end="{{cluster.end}}"/>
+            </cluster>
+        {% endfor %}
+    </clusters>
+    <parallel>{{concurrency}}</parallel>
+    <order>{{order}}</order>
+    <frequency>{{frequency_unit}}({{frequency_value}})</frequency>
+    <timezone>UTC</timezone>
+    
+    {% if input_feeds %}
+    <inputs>
+        {% for feed in input_feeds %}
+            <input name="{{feed.alias}}" feed="{{feed.name}}" start="{{feed.start}}" end="{{feed.end}}" {% if feed.partition %}partition="{{feed.partition}}" {% endif %}/>
+        {% endfor %}
+    </inputs>
+    {% endif %}
+
+    {% if output_feeds %}
+    <outputs>
+        {% for feed in output_feeds %}
+            <output name="{{feed.alias}}" feed="{{feed.name}}" instance="{{feed.instance}}"/>
+        {% endfor %}
+    </outputs>
+    {% endif %}
+
+    {% if properties %}
+    <properties>
+        {% for el in properties %}
+        <property name="{{el.0}}" value="{{el.1}}"/>
+        {% endfor %}
+    </properties>
+    {% endif %}
+
+    <workflow engine="{{wf_engine}}" path="{{wf_location}}" lib="{{wf_lib}}"/>
+    {% if retry %}
+    <retry policy="{{retry_policy}}" delay="{{retry_delay}}" attempts="{{retry_attempts}}"/>
+    {% endif %}
+    
+</process>

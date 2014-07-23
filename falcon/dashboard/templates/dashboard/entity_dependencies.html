@@ -1,0 +1,33 @@
+<div class="panel panel-default" id="panel-dependency">
+  <div class="panel-heading clearfix">    
+    <span style="vertical-align:center">Dependencies</span>
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary" id="btn-dep-list">List view</button>
+      <button class="btn btn-default" id="btn-dep-graph">Graph view</button>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div id="dep-view-list" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Entity Name</th>
+            <th>Entity Type</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in dependencies.entity %}
+          <tr>
+            <td>{{row.name}}</td>
+            <td>{{row.type |capfirst}}</td>
+            <td>{{row.tag}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

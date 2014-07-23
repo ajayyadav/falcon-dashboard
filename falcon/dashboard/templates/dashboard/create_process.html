@@ -1,0 +1,422 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}<title>New Process</title>{% endblock title %}
+
+
+{% block content %}
+
+<form class="form-horizontal" role="form" id="process-create-form" action="" method="POST">
+{% csrf_token %}
+    <div class="form-group">
+        <label for="prcess-name" class="control-label col-sm-2">Process Name</label>
+        <div class="col-sm-10 col-md-6">
+            <input type="text" name="name" class="form-control" id="process-name" placeholder="Sample-Process-Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <span class="control-label col-sm-2">Execution</span>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="concurrency" class="col-md-2 control-label">Concurrency</label>
+                <div class="col-sm-3 col-md-2">
+                    <input type="number"  name="concurrency" class="form-control" id="concurrency" min="1">
+                </div>
+                <label for="order" class="control-label col-sm-2 col-md-2">Order</label>
+                <div class="col-sm-3 col-md-2">
+                    <select name="order" class="form-control" id="order">
+                        <option value="lifo">LIFO</option>
+                        <option value="fifo">FIFO</option>
+                        <option value="last">LAST</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="frequency-unit" class="control-label col-sm-2">Frequency</label>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <select class="form-control" name="frequency_unit" id="frequency-unit">
+                    <option value="months">Months</option>
+                    <option value="days">Days</option>
+                    <option value="hours">Hours</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" type="number" min="1" name="frequency_value">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="timeout-unit" class="control-label col-sm-2">Timeout</label>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <select class="form-control" name="timeout-unit" id="timeout-unit">
+                    <option value="months">Months</option>
+                    <option value="days">Days</option>
+                    <option value="hours">Hours</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" type="number" min="1" name="timeout-value">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="retry-unit"class="control-label col-sm-2">Retry-After</label>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <select class="form-control" name="retry-unit" id="retry-unit">
+                    <option value="months">Months</option>
+                    <option value="days">Days</option>
+                    <option value="hours">Hours</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" type="number" min="1" name="retry-value">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="retry-policy" class="control-label col-sm-2">Retry-Policy</label>
+        <div class="col-sm-10 col-md-6">
+            <div class="col-md-4">
+                <select class="form-control" name="retry_policy" id="retry-policy">
+                    <option value="linear">Linear BackOff</option>
+                    <option value="exponential">Exponential Backoff</option>
+                </select>
+            </div>
+            <label for="retry_attempts"class="control-label col-md-2">Attempts</label>
+            <div class="col-md-2">
+                <input id="retry_attempts" class="form-control" name="retry_attempts" min="1">
+            </div>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Clusters</legend>
+        <div class="form-group">
+            <button type="button" id="add-cluster" class="btn btn-success">Add more</button>
+        </div>
+        <div class="well form-group">
+            <div class="col-md-2">
+                <select name="cluster-1" class="form-control cluster-widget-select">
+                    {% for cluster in clusters %}
+                        <option value="{{cluster}}">{{cluster}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <label for="cluster-start-1" class="control-label col-md-1">Start</label>
+            <div class="col-md-3">
+                <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
+                    <input type="text" class="form-control" name="cluster-start-1"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+            <label for="cluster-end-1" class="control-label col-md-1">End</label>
+            <div class="col-md-3">
+                <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
+                    <input type="text" class="form-control" name="cluster-end-1"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+            <!-- <button type="button" class="btn btn-danger pull-right delete-cluster">Delete</button> -->
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Input-Feeds</legend>
+        <div class="form-group">
+            <button type="button" id="add-input-feed" class="btn btn-success">Add more</button>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <label class="control-label col-sm-1" >Feed</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="input-feed-1" >
+                        {% for feed in feeds %}
+                        <option value="{{feed}}">{{feed}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="control-label col-sm-1" >Alias</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="input-feed-alias-1" >
+                </div>
+
+                <label class="control-label col-sm-1" >Partition</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="input-feed-partition-1" >
+                </div>
+
+                <label class="control-label col-sm-1" >Optional</label>
+                <div class="col-sm-1">
+                    <input type="checkbox" class="form-control" name="input-feed-optional-1" value="1" >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-1">Start</label>
+                <div class="col-md-3">
+                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
+                        <input type="text" class="form-control" name="input-feed-start-1"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <label class="control-label col-sm-1">End</label>
+                <div class="col-md-3">
+                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
+                        <input type="text" class="form-control" name="input-feed-end-1"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger pull-right delete-input-feed">Delete</button>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>Output-Feeds</legend>
+        <div class="form-group">
+            <button type="button" id="add-output-feed" class="btn btn-success">Add more</button>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <label class="control-label col-sm-1" >Feed</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="output-feed-1">
+                        {% for feed in feeds %}
+                        <option value="{{feed}}">{{feed}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="control-label col-sm-1" >Alias</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="output-feed-alias-1" >
+                </div>
+
+                <label class="control-label col-sm-1" for="">Instance</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="output-feed-instance-1" >
+                </div>
+                <button type="button" class="btn btn-danger pull-right delete-output-feed">Delete</button>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Properties</legend>
+        <div class="form-group">
+            <button type="button" id="add-property" class="btn btn-success">Add more</button>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <label for="property-key-1" class="control-label col-sm-1">Key</label>
+                <div class="col-sm-10 col-md-2">
+                    <input type="text"  name="property-key-1" class="form-control" id="property-key-1">
+                </div>
+
+                <label for="property-value-1" class="control-label col-sm-1">Value</label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text"  name="property-value-1" class="form-control" id="property-value-1">
+                </div>
+                <button type="button" class="btn btn-danger pull-right delete-property">Delete</button>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Workflow</legend>
+
+        <div class="form-group">
+            <label for="wf_engine" class="control-label col-sm-2">Workflow</label>
+            <div class="col-md-2">
+                <select name="wf_engine" class="form-control col-md-4" id="wf_engine">
+                    <option value="oozie">Oozie</option>
+                    <option value="pig">Pig</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" type="text" name="wf_location" placeholder="/projects/cas/daily/workflow.xml">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row ">
+        <div class="col-md-offset-5 col-md-3">
+            <input type="submit" class="btn btn-primary" value="Export">
+            <input type="submit" class="btn btn-primary" value="Submit">   
+            <input type="submit" class="btn btn-primary" value="Schedule">
+        </div>
+    </div>
+</form>
+
+
+
+{% endblock content %}
+
+
+
+{% block child_js %}
+<script type="text/javascript">
+$(function(){
+    var inputFeedCount = 1;
+    var outputFeedCount = 1;
+    var clusterCount = 1;
+    var propertyCount = 1;
+// click on any element with delete parent class will remove it's parent element from DOM
+    $(document).on('click', '.delete-input-feed', function(){
+        $(this).closest('div.well').remove();
+        inputFeedCount--;
+    });
+
+    $(document).on('click', '.delete-output-feed', function(){
+        $(this).closest('div.well').remove();
+        outputFeedCount--;
+    });
+
+    $(document).on('click', '.delete-cluster', function(){
+        $(this).closest('div.well').remove();
+        clusterCount--;
+    });
+
+    $(document).on('click', '.delete-property', function(){
+        $(this).closest('div.well').remove();
+        propertyCount--;
+    });
+
+// Clicking on any add-more-* button will clone it's adjacent sibling along with values and add it as first child
+    
+    $('#add-input-feed').on('click', function(){
+        inputFeedCount++;
+        $(this).parent().parent().append('<div class="well">\
+            <div class="form-group">\
+                <label class="control-label col-sm-1">Feed</label>\
+                <div class="col-sm-3">\
+                    <select class="form-control" name="input-feed-'+inputFeedCount+'">\
+                        {% for feed in feeds %}\
+                        <option value="{{feed}}">{{feed}}</option>\
+                        {% endfor %}\
+                    </select>\
+                </div>\
+                <label class="control-label col-sm-1" for="">Alias</label>\
+                <div class="col-sm-2">\
+                    <input type="text" class="form-control" name="input-feed-alias-'+inputFeedCount+'" >\
+                </div>\
+                <label class="control-label col-sm-1" for="">Partition</label>\
+                <div class="col-sm-2">\
+                    <input type="text" class="form-control" name="input-feed-partition-'+inputFeedCount+'" >\
+                </div>\
+                <label class="control-label col-sm-1" for="">Optional</label>\
+                <div class="col-sm-1">\
+                    <input type="checkbox" class="form-control" name="input-feed-optional-'+inputFeedCount+'" value="1" >\
+                </div>\
+            </div>\
+            <div class="form-group">\
+                <label class="control-label col-sm-1" >Start</label>\
+                <div class="col-md-3">\
+                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">\
+                        <input type="text" class="form-control" name="input-feed-start-'+inputFeedCount+'"/>\
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>\
+                    </div>\
+                </div>\
+                <label class="control-label col-sm-1" >End</label>\
+                <div class="col-md-3">\
+                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">\
+                        <input type="text" class="form-control" name="input-feed-end-'+inputFeedCount+'"/>\
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>\
+                    </div>\
+                </div>\
+                <button type="button" class="btn btn-danger pull-right delete-input-feed">Delete</button>\
+            </div>\
+        </div>');
+
+    });
+
+    $('#add-output-feed').on('click', function(){
+        outputFeedCount++;
+        $(this).parent().parent().append('<div class="well">\
+            <div class="form-group">\
+                <label class="control-label col-sm-1">Feed</label>\
+                <div class="col-sm-3">\
+                    <select class="form-control" name="output-feed-"' + outputFeedCount + '>\
+                        {% for feed in feeds %}\
+                        <option value="{{feed}}">{{feed}}</option>\
+                        {% endfor %}\
+                    </select>\
+                </div>\
+                <label class="control-label col-sm-1" >Alias</label>\
+                <div class="col-sm-2">\
+                    <input type="text" class="form-control" name="output-feed-alias-' + outputFeedCount + '" >\
+                </div>\
+                <label class="control-label col-sm-1" >Instance</label>\
+                <div class="col-sm-2">\
+                    <input type="text" class="form-control" name="output-feed-instance-' + outputFeedCount + '" >\
+                </div>\
+                <button type="button" class="btn btn-danger pull-right delete-output-feed">Delete</button>\
+            </div>\
+        </div>');
+    });
+    
+    $('#add-cluster').on('click', function(){
+        clusterCount++;
+        $(this).parent().parent().append('<div class="well form-group">\
+            <div class="col-md-2">\
+                <select name="cluster-'+clusterCount+'" class="form-control cluster-widget-select">\
+                    {% for cluster in clusters %}\
+                    <option value="{{cluster}}">{{cluster}}</option>\
+                    {% endfor %}\
+                </select>\
+            </div>\
+            <label for="cluster-start-'+clusterCount+'" class="control-label col-md-1">Start</label>\
+            <div class="col-md-3">\
+                <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">\
+                    <input type="text" class="form-control" name="cluster-start-'+clusterCount+'"/>\
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>\
+                </div>\
+            </div>\
+            <label for="cluster-end-'+clusterCount+'" class="control-label col-md-1">End</label>\
+            <div class="col-md-3">\
+                <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">\
+                    <input type="text" class="form-control" name="cluster-end-'+clusterCount+'"/>\
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>\
+                </div>\
+            </div>\
+            <button type="button" class="btn btn-danger pull-right delete-cluster">Delete</button>\
+        </div>');
+
+    });
+
+    $('#add-property').on('click', function(){
+        propertyCount++;
+        $(this).parent().parent().append('<div class="well">\
+            <div class="form-group">\
+            <label for="property-key-'+propertyCount+'" class="control-label col-sm-1">Key</label>\
+            <div class="col-sm-10 col-md-2">\
+            <input type="text"  name="property-key-'+propertyCount+'" class="form-control" id="property-key-'+propertyCount+'">\
+            </div>\
+            <label for="property-value-'+propertyCount+'" class="control-label col-sm-1">Value</label>\
+            <div class="col-sm-10 col-md-4">\
+            <input type="text"  name="property-value-'+propertyCount+'" class="form-control" id="property-value-'+propertyCount+'">\
+            </div>\
+            <button type="button" class="btn btn-danger pull-right delete-property">Delete</button>\
+            </div>\
+            </div>');
+
+});
+});
+
+
+</script>
+{% endblock child_js %}

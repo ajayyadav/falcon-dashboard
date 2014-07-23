@@ -1,0 +1,24 @@
+<div class="panel panel-default" id="panel-instance">
+
+  <div class="panel-heading">
+    Instances
+    <span class="pull-right"><a href="">View More</a></span>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+
+        <tbody>
+          {% for row in instances %}
+          <tr>
+            <td>{{row.time}}</td>
+            <td class="instance-links"><a href="">Lineage</a> <a href="">Logs</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>

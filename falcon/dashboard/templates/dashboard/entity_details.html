@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{%block title %}<title>{{name}}</title> {% endblock title %}
+
+{% block content %}
+
+<h4><small>{{type|capfirst}}</small> {{name}} </h4>
+
+{% if type != "cluster" %}
+<!-- Entity Instances section - valid only for process/feeds ??-->
+{% include 'dashboard/entity_instances.html' %}
+
+{% endif %}
+
+
+<!-- Dependencies for the current entity -->
+{% include 'dashboard/entity_dependencies.html' %}
+
+
+<!-- Entity definition section -->
+{% include 'dashboard/entity_definition.html' %}
+
+
+
+{% endblock content %}
+
+
+
+{% block child_scripts %}
+<script src="{{STATIC_URL}}js/falcon-entity.js"></script>
+{% endblock child_scripts %}
