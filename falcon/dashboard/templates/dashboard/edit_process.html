@@ -10,46 +10,24 @@
     <div class="form-group">
         <label for="prcess-name" class="control-label col-sm-2">Process Name</label>
         <div class="col-sm-10 col-md-6">
-            <input type="text" name="name" class="form-control" id="process-name" placeholder="Sample-Process-Name">
+            <input type="text" name="name" class="form-control" id="process-name" value="{{p.name}}" readonly>
         </div>
     </div>
-
-    <div class="form-group">
-        <label for="start-time" class="control-label col-sm-2">Start Time</label>
-        <div class="col-sm-10 col-md-6">
-            <!-- <input type="datetime" name="name" class="form-control" id="start-time" placeholder="2014-07-30T10:30Z"> -->
-            <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                <input type="text" class="form-control" name="start-time"/>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="end-time" class="control-label col-sm-2">End Time</label>
-        <div class="col-sm-10 col-md-6">
-            <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                <input type="text" class="form-control" name="end-time"/>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-            </div>
-        </div>
-    </div>
-
 
     <div class="form-group">
         <span class="control-label col-sm-2">Execution</span>
         <div class="col-md-6">
             <div class="form-group row">
-                <label for="concurrency" class="col-md-2 control-label">Concurrency</label>
+                <label for="parallel" class="col-md-2 control-label">Concurrency</label>
                 <div class="col-sm-3 col-md-2">
-                    <input type="number"  name="concurrency" class="form-control" id="concurrency" min="1">
+                    <input type="number"  name="parallel" class="form-control" id="parallel" min="1" value="{{p.parallel}}">
                 </div>
                 <label for="order" class="control-label col-sm-2 col-md-2">Order</label>
                 <div class="col-sm-3 col-md-2">
                     <select name="order" class="form-control" id="order">
-                        <option value="lifo">LIFO</option>
-                        <option value="fifo">FIFO</option>
-                        <option value="last">LAST</option>
+                        <option value="fifo" {% if p.order == 'fifo' %}selected{% endif %}>FIFO</option>
+                        <option value="last" {% if p.order == 'last' %}selected{% endif %}>LAST</option>
+                        <option value="lifo" {% if p.order == 'lifo' %}selected{% endif %}>LIFO</option>
                     </select>
                 </div>
             </div>
@@ -57,68 +35,38 @@
     </div>
 
     <div class="form-group">
-        <label for="frequency-unit" class="control-label col-sm-2">Frequency</label>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <select class="form-control" name="frequency-unit" id="frequency-unit">
-                    <option value="months">Months</option>
-                    <option value="days">Days</option>
-                    <option value="hours">Hours</option>
-                    <option value="minutes">Minutes</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <input class="form-control" type="number" min="1" name="frequency-value">
-            </div>
+        <label for="frequency" class="control-label col-sm-2">Frequency</label>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="frequency" value="{{p.frequency}}">
         </div>
     </div>
 
     <div class="form-group">
         <label for="timeout-unit" class="control-label col-sm-2">Timeout</label>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <select class="form-control" name="timeout-unit" id="timeout-unit">
-                    <option value="months">Months</option>
-                    <option value="days">Days</option>
-                    <option value="hours">Hours</option>
-                    <option value="minutes">Minutes</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <input class="form-control" type="number" min="1" name="timeout-value">
-            </div>
+        <div class="col-md-2">
+            <input class="form-control" type="text" name="timeout-value" value="{{p.timeout}}">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="retry-unit"class="control-label col-sm-2">Retry-After</label>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <select class="form-control" name="retry-unit" id="retry-unit">
-                    <option value="months">Months</option>
-                    <option value="days">Days</option>
-                    <option value="hours">Hours</option>
-                    <option value="minutes">Minutes</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <input class="form-control" type="number" min="1" name="retry-value">
-            </div>
+        <label for="retry_after" class="control-label col-sm-2">Retry-After</label>
+        <div class="col-md-2">
+            <input class="form-control" id="retry_after" type="text" min="1" name="retry_after" value="{{p.retry.after}}">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="retry-policy" class="control-label col-sm-2">Retry-Policy</label>
+        <label for="retry_policy" class="control-label col-sm-2">Retry-Policy</label>
         <div class="col-sm-10 col-md-6">
             <div class="col-md-4">
-                <select class="form-control" name="retry-policy" id="retry-policy">
-                    <option value="linear">Linear BackOff</option>
-                    <option value="exponential">Exponential Backoff</option>
+                <select class="form-control" name="rt_policy" id="retry_policy">
+                    <option value="linear" {% if p.retry.policy == 'linear' %}selected{% endif %}>Linear BackOff</option>
+                    <option value="exponential" {% if p.retry.policy == 'exponential' %}selected{% endif %}>Exponential BackOff</option>
                 </select>
             </div>
-            <label for="retry-attempts"class="control-label col-md-2">Attempts</label>
+            <label for="retry_attempts"class="control-label col-md-2">Attempts</label>
             <div class="col-md-2">
-                <input id="retry-attempts" class="form-control" name="retry-attempts" min="1">
+                <input id="retry_attempts" class="form-control" name="retry_attempts" min="1" value="{{p.retry.attempts}}">
             </div>
         </div>
     </div>
@@ -128,32 +76,37 @@
         <div class="form-group">
             <button type="button" id="add-cluster" class="btn btn-success">Add more</button>
         </div>
+
+        {% for cluster in p.clusters %}
         <div class="well form-group">
             <div class="col-md-2">
-                <select name="cluster-1" class="form-control cluster-widget-select">
+                <select name="cluster-{{forloop.counter}}" class="form-control cluster-widget-select">
                     <!-- fill this from backend -->
-                    <option value="hkg">HKG1</option>
-                    <option value="ua2">UA2</option>
-                    <option value="uj1">UJ1</option>
+                    {% for cl in clusters %}
+                        <option value="{{cl.name}}" {% if cl == cluster.name %}selected{% endif %}>{{cl|capfirst}}</option>
+                    {% endfor %}
                 </select>
             </div>
 
-            <label for="cluster-1-start-time" class="control-label col-md-1">Start</label>
+            <label for="cluster-start-time-{{forloop.counter}}" class="control-label col-md-1">Start</label>
             <div class="col-md-3">
                 <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                    <input type="text" class="form-control" name="cluster-1-start-time"/>
+                    <input type="text" class="form-control" name="cluster-start-time-{{forloop.counter}}" value="{{cluster.start}}"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
             </div>
-            <label for="cluster-1-end-time" class="control-label col-md-1">End</label>
+            <label for="cluster-end-time-{{forloop.counter}}" class="control-label col-md-1">End</label>
             <div class="col-md-3">
                 <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                    <input type="text" class="form-control" name="cluster-1-end-time"/>
+                    <input type="text" class="form-control" name="cluster-end-time-{{forloop.counter}}" value="{{cluster.end}}"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
             </div>
-            <!-- <button type="button" class="btn btn-danger pull-right delete-cluster">Delete</button> -->
-        </div>
+            <!-- Delete button should hide itself when only one cluster definition left -->
+            <button type="button" class="btn btn-danger pull-right delete-cluster">Delete</button>
+        </div>    
+        {% endfor %}
+        
     </fieldset>
 
     <fieldset>
@@ -161,50 +114,47 @@
         <div class="form-group">
             <button type="button" id="add-input-feed" class="btn btn-success">Add more</button>
         </div>
+
+        {% for input in p.inputs %}
         <div class="well">
             <div class="form-group">
-                <label class="control-label col-sm-1" for="input-feed-1">Feed</label>
+                <label class="control-label col-sm-1" for="input-feed-{{forloop.counter}}">Feed</label>
                 <div class="col-sm-3">
-                    <select class="form-control" name="input-feed-1">
+                    <select class="form-control" name="input-feed-{{forloop.counter}}">
                         {% for feed in feeds %}
-                        <option value="{{feed}}">{{feed}}</option>
+                            <option value="{{feed}}" {% if input.feed == feed%}selected{% endif %}>{{feed}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <label class="control-label col-sm-1" for="">Alias</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="input-feed-1-alias" >
+                    <input type="text" class="form-control" name="input-feed-{{forloop.counter}}-alias" value="{{input.name}}">
                 </div>
 
                 <label class="control-label col-sm-1" for="">Partition</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="input-feed-1-partition" >
+                    <input type="text" class="form-control" name="input-feed-{{forloop.counter}}-partition" value="{{input.partition}}">
                 </div>
 
                 <label class="control-label col-sm-1" for="">Optional</label>
                 <div class="col-sm-1">
-                    <input type="checkbox" class="form-control" name="input-feed-1-optional" value="1" >
+                    <input type="checkbox" class="form-control" name="input-feed-{{forloop.counter}}-optional" value="1" {% if input.optional %}checked{% endif %}>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-1" for="input-feed-1">Start</label>
+                <label class="control-label col-sm-1" for="input-feed-{{forloop.counter}}">Start</label>
                 <div class="col-md-3">
-                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                        <input type="text" class="form-control" name="input-feed-1-start-time"/>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
+                    <input type="text" class="form-control" name="input-feed-{{forloop.counter}}-start-time" value="{{input.start}}"/>
                 </div>
-                <label class="control-label col-sm-1" for="input-feed-1">End</label>
+                <label class="control-label col-sm-1" for="input-feed-{{forloop.counter}}">End</label>
                 <div class="col-md-3">
-                    <div class="input-group date bootstrap-datetimepicker" data-date-format="YYYY-MM-DD HH:mm">
-                        <input type="text" class="form-control" name="input-feed-1-end-time"/>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
+                    <input type="text" class="form-control" name="input-feed-{{forloop.counter}}-end-time" value="{{input.end}}"/>
                 </div>
                 <button type="button" class="btn btn-danger pull-right delete-input-feed">Delete</button>
             </div>
         </div>
+        {% endfor %}
     </fieldset>
 
 
@@ -213,28 +163,30 @@
         <div class="form-group">
             <button type="button" id="add-output-feed" class="btn btn-success">Add more</button>
         </div>
+        {% for output in p.outputs %}
         <div class="well">
             <div class="form-group">
-                <label class="control-label col-sm-1" for="input-feed-1">Feed</label>
+                <label class="control-label col-sm-1" for="output-feed-">Feed</label>
                 <div class="col-sm-3">
-                    <select class="form-control" name="input-feed-1">
+                    <select class="form-control" name="output-feed-{{forloop.counter}}">
                         {% for feed in feeds %}
-                        <option value="{{feed}}">{{feed}}</option>
+                            <option value="{{feed}}" {% if output.feed == feed %}selected{% endif %}>{{feed}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <label class="control-label col-sm-1" for="">Alias</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="input-feed-1-alias" >
+                    <input type="text" class="form-control" name="output-feed-{{forloop.counter}}-alias" value="{{output.name}}">
                 </div>
 
                 <label class="control-label col-sm-1" for="">Instance</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="input-feed-1-partition" >
+                    <input type="text" class="form-control" name="output-feed-{{forloop.counter}}-partition" value="{{output.instance}}" >
                 </div>
                 <button type="button" class="btn btn-danger pull-right delete-output-feed">Delete</button>
             </div>
         </div>
+        {% endfor %}
     </fieldset>
 
     <fieldset>
@@ -242,21 +194,23 @@
         <div class="form-group">
             <button type="button" id="add-property" class="btn btn-success">Add more</button>
         </div>
+
+        {% for key, value in p.properties.items %}
         <div class="well">
             <div class="form-group">
-                <label for="property-key-1" class="control-label col-sm-1">Key</label>
+                <label for="property-key-{{forloop.counter}}" class="control-label col-sm-1">Key</label>
                 <div class="col-sm-10 col-md-2">
-                    <input type="text"  name="property-key-1" class="form-control" id="property-key-1">
+                    <input type="text"  name="property-key-{{forloop.counter}}" class="form-control" id="property-key-{{forloop.counter}}" value="{{key}}">
                 </div>
 
-                <label for="property-value-1" class="control-label col-sm-1">Value</label>
+                <label for="property-value-{{forloop.counter}}" class="control-label col-sm-1">Value</label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text"  name="property-value-1" class="form-control" id="property-value-1">
+                    <input type="text"  name="property-value-{{forloop.counter}}" class="form-control" id="property-value-{{forloop.counter}}" value="{{value}}">
                 </div>
                 <button type="button" class="btn btn-danger pull-right delete-property">Delete</button>
             </div>
         </div>
-
+        {%  endfor %}
     </fieldset>
 
     <fieldset>
@@ -266,12 +220,13 @@
             <label for="wf-engine" class="control-label col-sm-2">Workflow</label>
             <div class="col-md-2">
                 <select name="wf-engine" class="form-control col-md-4" id="wf-engine">
-                    <option value="oozie">Oozie</option>
-                    <option value="pig">Pig</option>
+                    {% for wf in workflows %}
+                    <option value="{{wf}}" {% if p.workflow.engine == wf %}selected{% endif %}>{{wf|capfirst}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col-md-4">
-                <input class="form-control" type="text" name="wf-location" placeholder="/projects/cas/daily/workflow.xml">
+                <input class="form-control" type="text" name="wf_path" value="{{p.workflow.path}}">
             </div>
         </div>
     </fieldset>
@@ -288,7 +243,7 @@
 {% block child_js %}
 <script type="text/javascript">
 $(function(){
-    var inputFeedCount = 1;
+    var inputFeedCount = 1; //TODO: should be length of elements that exist
     var outputFeedCount = 1;
     var clusterCount = 1;
     var propertyCount = 1;

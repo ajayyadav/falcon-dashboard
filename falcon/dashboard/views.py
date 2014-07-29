@@ -32,3 +32,21 @@ def entity_details(request, type, name, template_name='dashboard/entity_details.
     return render(request, template_name, locals() )
 
 
+def edit_process(request, name):
+    pass
+
+def edit_process(request, name):
+    pass
+
+def edit_process(request, name):
+    pass
+
+
+def edit_entity(request, type, name):
+
+    if type == 'process':
+        return edit_process(request, name)
+    elif type == 'feed':
+        return edit_feed(request, name)
+    else:
+        return edit_cluster(request, name)
