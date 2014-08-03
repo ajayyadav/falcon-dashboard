@@ -1,0 +1,113 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block content %}
+
+<pre>Pipeline Summary {{pipeline_name}}</pre>
+
+<!-- Generate the tabs -->
+<ul class="nav nav-tabs">
+  {% for colo in summary %}
+  <li {% if forloop.first %} class="active" {% endif %}><a href="#{{colo}}" data-toggle="tab">{{colo}}</a></li>
+  {% endfor %}
+</ul>
+
+
+
+<div class="tab-content">
+  {% for colo, colo_summary in summary.items %}
+
+  <div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{colo}}"> 
+<br>
+<br>
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#process-summary{{forloop.counter}}" data-toggle="pill">Process Summary</a></li>
+      <li><a href="#feed-summary{{forloop.counter}}" data-toggle="tab">Feed Summary</a></li>
+    </ul>
+    
+
+    <div class="tab-content">    
+    
+      <div class="tab-pane active" id="process-summary{{forloop.counter}}">
+        <div class="table-responsive">
+          <table class='datatable table table-striped'>
+            <thead> 
+              <tr>
+                <th>Name</th>
+                <th>Succeeded</th>
+                <th>Failed</th>
+                <th>Killed</th>
+                <th>Running</th>
+                <th>TimedOut</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for summary in colo_summary.processes %}
+              <tr>
+                <td><a href={% url 'process_summary' summary.0  %} >{{ summary.0}} </a> </td>
+                <td>{{ summary.1}}</td>
+                <td>{{ summary.2}}</td>
+                <td>{{ summary.3}}</td>
+                <td>{{ summary.4}}</td>
+                <td>{{ summary.5}}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" id="feed-summary{{forloop.counter}}">
+        <div class="table-responsive">
+          <table class='datatable table table-striped'>
+            <thead> 
+              <tr>
+                <th>Name</th>
+                <th>SLA met</th>
+                <th>SLA missed</th>
+                <th>Succeeded</th>
+                <th>Failed</th>
+                <th>Killed</th>
+                <th>Running</th>
+                <th>TimedOut</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for summary in colo_summary.feeds %}
+              <tr>
+                <td><a href={% url 'feed_summary' feed_name=summary.0  %} >{{ summary.0}} </a> </td>
+                <td>{{ summary.1}} </td>
+                <td> 0 </td>
+                <td>{{ summary.1}} </td>
+                <td>{{ summary.2}} </td>
+                <td>{{ summary.3}} </td>
+                <td>{{ summary.4}} </td>
+                <td>{{ summary.5}} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div><!-- end inner tab-pane -->
+
+    </div> <!-- end inner tab-content -->
+
+  </div>
+  {% endfor %}
+</div> <!-- end outer tab-content -->
+
+
+
+{% endblock content %}
+
+{% block child_js %}
+<script type="text/javascript">
+$(function(){
+  $('.datatable').dataTable();
+});
+
+
+</script>
+{% endblock child_js %}

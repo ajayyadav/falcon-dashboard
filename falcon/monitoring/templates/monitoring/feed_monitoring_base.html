@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<div class="panel panel-default" id="panel-dependency">
+    <div class="panel-heading clearfix">    
+        <span style="vertical-align:center">{{feed_name}} [Feed] - JOB ID ></span>
+        <div class="btn-group pull-right">
+            <a href="{% url 'feed_summary' feed_name %}" class="btn btn-default" id="feed-sla-list">
+                List View
+            </a>
+            <a href="{% url 'feed_sla_graph' feed_name %}" class="btn btn-default" id="feed-sla-graph">
+                Graph View
+            </a>
+            <a href="{% url 'feed_space_usage_graph' feed_name %}" class="btn btn-default" id="feed-disk-usage">
+                Disk Usage
+            </a>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        {% block child_content %} {% endblock child_content %}
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -2,20 +2,21 @@
 
 {% block content %}
 
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <form method="GET" class="form-inline" role="form">
-      <div class="form-group">
-        <select name="type" class="form-control">
-          <option value="process">Process</option>
-          <option value="feed">Feed</option>
-          <option value="cluster">Cluster</option>
-        </select>
-        <input type="text" class="form-control" name="name" placeholder="Search by entity name" id="q">
-      </div><!-- /input-group -->
-    </form>
-  </div><!-- /.col-md-6 -->
-</div>
+<form method="GET" class="form-inline" role="form" id="dashboard_index_form">
+
+  <div class="my-input-group col-md-offset-3">
+    <select name="type" class="form-control">
+      <option value="process">Process</option>
+      <option value="feed">Feed</option>
+      <option value="cluster">Cluster</option>
+    </select>
+
+    <input type="text" class="form-control" name="name" placeholder="Search by entity name" id="q" style="width:400px;">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+
+</form>
 
 
 {% if query %}

@@ -1,0 +1,44 @@
+{% extends 'monitoring/feed_monitoring_base.html' %}
+
+
+{% block child_content %}
+
+<div class="table-responsive">
+	<table class="datatable table table-striped">
+		<thead>
+			<tr>
+				<th>Scheduled Time</th>
+				<th>Start time</th>
+				<th>SLA</th>
+				<th>Finished time</th>
+				<th>SLA Status</th>
+				<th>Instance Id</th>
+				<th>Job Status</th> 
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for row in status %}
+			<!-- Store link on a hidden data element -->
+			<tr class="">
+				<td>{{row.0}}</td>
+				<td>{{row.1}}</td>
+				<td>{{row.2}}</td>
+				<td>{{row.3}}</td>
+				<td>{{row.4}}</td>
+				<td>{{row.5}}</td>
+				<td>{{row.6}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock child_content %}
+
+{% block child_js %}
+<script type="text/javascript">
+	$(function(){
+		$('.datatable').dataTable();
+	});
+</script>
+{% endblock child_js %}

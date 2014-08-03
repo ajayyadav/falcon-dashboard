@@ -13,7 +13,7 @@ class CreateProcess(View):
     xml_template = 'dashboard/process_definition.xml'
 
     def get(self, request):
-        # <view logic>
+        current_app='designer'
         clusters = get_clusters_list()
         feeds = get_feeds_list()
         workflows = get_workflows()
@@ -21,6 +21,7 @@ class CreateProcess(View):
 
     def post(self, request):
         # create the context dict for the template and generate the xml 
+        current_app='designer'
         cont = create_process_context(request)
         c = Context(cont)
         t =  get_template(self.xml_template)
@@ -35,19 +36,21 @@ class UpdateProcess(View):
 
     def get(self, request, name):
         # api: get definition of process with this name - json
+        current_app='designer'
         process = get_process_definition(name)
         feeds = get_feeds_list()
         clusters = get_clusters_list()
         workflows = get_workflows()
         # import pdb; pdb.set_trace()
         #TODO: handle the case where name provided is incorrect
-        return render(request, self.template_name, {'p':process,'feeds':feeds,'clusters':clusters,'workflows':workflows})
+        return render(request, self.template_name, {'p':process,'feeds':feeds,'clusters':clusters,'workflows':workflows,'current_app':current_app})
 
     def post(self, request, name):
+        current_app='designer'
         # api: update the process with name - should accept json
         # TODO: handle the errors case, highlight and show it to user
         # TODO: show disappearing success message and redirect to entity_details page
-        return render(request, self.template_name)
+        return render(request, self.template_name, locals())
 
 class CreateFeed(View):
     pass
@@ -58,14 +61,16 @@ class UpdateFeed(View):
     def get(self, request, name):
         # api: get definition of process with this name - json
         process = get_process_definition(name)
+        current_app='designer'
         #TODO: handle the case where name provided is incorrect
-        return render(request, self.template_name, {'process':process})
+        return render(request, self.template_name, locals())
 
     def post(self, request, name):
         # api: update the process with name - should accept json
         # TODO: handle the errors case, highlight and show it to user
         # TODO: show disappearing success message and redirect to entity_details page
-        return render(request, self.template_name)
+        current_app='designer'
+        return render(request, self.template_name,locals())
 
 class CreateCluster(View):
     pass
@@ -74,12 +79,14 @@ class UpdateCluster(View):
     template_name = 'dashboard/edit_process.html'
 
     def get(self, request, name):
+        current_app='designer'
         # api: get definition of process with this name - json
         process = get_process_definition(name)
         #TODO: handle the case where name provided is incorrect
         return render(request, self.template_name, {'process':process})
 
     def post(self, request, name):
+        current_app='designer'
         # api: update the process with name - should accept json
         # TODO: handle the errors case, highlight and show it to user
         # TODO: show disappearing success message and redirect to entity_details page

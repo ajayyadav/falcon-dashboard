@@ -14,6 +14,5 @@ urlpatterns = patterns('',
 urlpatterns += patterns('dashboard.views',
 
     url(r'^(?P<type>[a-z]+)/(?P<name>[0-9a-zA-Z@\-]+)/$', 'entity_details', name="entity_details"),
-    url(r'^$', 'search_entity'),
+    url(r'^$', 'dashboard_index', name="dashboard_index"),
 )
-

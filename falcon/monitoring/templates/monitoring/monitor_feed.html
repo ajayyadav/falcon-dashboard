@@ -1,0 +1,54 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block content %}
+<div class="table-responsive">
+	<table class="datatable table table-striped">
+		<thead>
+			<tr>
+				<th>Feed Name</th>
+				<th>Colo</th>
+				<th>Frequency(in hours)</th>
+				<th>Priority</th>
+				<th>SLA met</th>
+				<th>SLA missed</th>
+				<th>Yet to complete</th>
+				<th>SLA met %</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for row in status %}
+			<!-- Store link on a hidden data element -->
+			<tr class="">
+				<td data-attr="{% url 'feed_summary' row.0 %}"><a href="{% url 'feed_summary' row.0 %}">{{row.0}}</a></td>
+				<td>{{row.1}}</td>
+				<td>{{row.2}}</td>
+				<td>{{row.3}}</td>
+				<td>{{row.4}}</td>
+				<td>{{row.5}}</td>
+				<td>{{row.6}}</td>
+				<td>{{row.7}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock content %}
+
+{% block child_js %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    $('.datatable').dataTable();
+     
+    $('.datatable tbody').on('click', 'tr', function () {
+        var name = $('td', this).eq(0).text();
+        alert( 'You clicked on '+name+'\'s row' );
+    });
+});
+
+</script>
+{% endblock child_js %}

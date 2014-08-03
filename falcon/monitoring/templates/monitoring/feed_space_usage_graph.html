@@ -1,0 +1,141 @@
+{% extends 'monitoring/feed_monitoring_base.html' %}
+
+
+{% block child_content %}
+
+<div id="graph-1" style="height: 300px;" class="container"></div>
+<div id="overview" style="height: 150px;" class="container"></div>
+
+{% endblock child_content %}
+
+{% block child_js %}
+<script type="text/javascript"> 
+var _data = [{"finish_timestamp": 1406977756, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793707, "timestamp": 1406973600, "completed": "yes", "sla_timestamp": 1406981400, "eta": 120, "eta_timestamp": 1406980800, "sla_met": "MET", "runtime": 4156, "sla": 130, "size": 37563809}, {"finish_timestamp": 1406974983, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793706, "timestamp": 1406970000, "completed": "yes", "sla_timestamp": 1406977800, "eta": 120, "eta_timestamp": 1406977200, "sla_met": "MET", "runtime": 4983, "sla": 130, "size": 37451269}, {"finish_timestamp": 1406971759, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793705, "timestamp": 1406966400, "completed": "yes", "sla_timestamp": 1406974200, "eta": 120, "eta_timestamp": 1406973600, "sla_met": "MET", "runtime": 5359, "sla": 130, "size": 36316140}, {"finish_timestamp": 1406967986, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793704, "timestamp": 1406962800, "completed": "yes", "sla_timestamp": 1406970600, "eta": 120, "eta_timestamp": 1406970000, "sla_met": "MET", "runtime": 5186, "sla": 130, "size": 33402739}, {"finish_timestamp": 1406964393, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793703, "timestamp": 1406959200, "completed": "yes", "sla_timestamp": 1406967000, "eta": 120, "eta_timestamp": 1406966400, "sla_met": "MET", "runtime": 5193, "sla": 130, "size": 29703882}, {"finish_timestamp": 1406960831, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793702, "timestamp": 1406955600, "completed": "yes", "sla_timestamp": 1406963400, "eta": 120, "eta_timestamp": 1406962800, "sla_met": "MET", "runtime": 5231, "sla": 130, "size": 25052609}, {"finish_timestamp": 1406955989, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793701, "timestamp": 1406952000, "completed": "yes", "sla_timestamp": 1406959800, "eta": 120, "eta_timestamp": 1406959200, "sla_met": "MET", "runtime": 3989, "sla": 130, "size": 20704363}, {"finish_timestamp": 1406953557, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793700, "timestamp": 1406948400, "completed": "yes", "sla_timestamp": 1406956200, "eta": 120, "eta_timestamp": 1406955600, "sla_met": "MET", "runtime": 5157, "sla": 130, "size": 19084044}, {"finish_timestamp": 1406949092, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793699, "timestamp": 1406944800, "completed": "yes", "sla_timestamp": 1406952600, "eta": 120, "eta_timestamp": 1406952000, "sla_met": "MET", "runtime": 4292, "sla": 130, "size": 19843539}, {"finish_timestamp": 1406945958, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793698, "timestamp": 1406941200, "completed": "yes", "sla_timestamp": 1406949000, "eta": 120, "eta_timestamp": 1406948400, "sla_met": "MET", "runtime": 4758, "sla": 130, "size": 23180551}, {"finish_timestamp": 1406942519, "name": "RTBI-Hourly-NetworkFact", "run_id": 5793697, "timestamp": 1406937600, "completed": "yes", "sla_timestamp": 1406945400, "eta": 120, "eta_timestamp": 1406944800, "sla_met": "MET", "runtime": 4919, "sla": 130, "size": 25540979}, {"finish_timestamp": 1406938985, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776452, "timestamp": 1406934000, "completed": "yes", "sla_timestamp": 1406941800, "eta": 120, "eta_timestamp": 1406941200, "sla_met": "MET", "runtime": 4985, "sla": 130, "size": 23481340}, {"finish_timestamp": 1406934437, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776451, "timestamp": 1406930400, "completed": "yes", "sla_timestamp": 1406938200, "eta": 120, "eta_timestamp": 1406937600, "sla_met": "MET", "runtime": 4037, "sla": 130, "size": 30025835}, {"finish_timestamp": 1406931812, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776450, "timestamp": 1406926800, "completed": "yes", "sla_timestamp": 1406934600, "eta": 120, "eta_timestamp": 1406934000, "sla_met": "MET", "runtime": 5012, "sla": 130, "size": 34921532}, {"finish_timestamp": 1406927956, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776449, "timestamp": 1406923200, "completed": "yes", "sla_timestamp": 1406931000, "eta": 120, "eta_timestamp": 1406930400, "sla_met": "MET", "runtime": 4756, "sla": 130, "size": 36712123}, {"finish_timestamp": 1406924857, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776448, "timestamp": 1406919600, "completed": "yes", "sla_timestamp": 1406927400, "eta": 120, "eta_timestamp": 1406926800, "sla_met": "MET", "runtime": 5257, "sla": 130, "size": 39128300}, {"finish_timestamp": 1406920764, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776447, "timestamp": 1406916000, "completed": "yes", "sla_timestamp": 1406923800, "eta": 120, "eta_timestamp": 1406923200, "sla_met": "MET", "runtime": 4764, "sla": 130, "size": 38609266}, {"finish_timestamp": 1406916919, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776446, "timestamp": 1406912400, "completed": "yes", "sla_timestamp": 1406920200, "eta": 120, "eta_timestamp": 1406919600, "sla_met": "MET", "runtime": 4519, "sla": 130, "size": 39407663}, {"finish_timestamp": 1406912989, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776445, "timestamp": 1406908800, "completed": "yes", "sla_timestamp": 1406916600, "eta": 120, "eta_timestamp": 1406916000, "sla_met": "MET", "runtime": 4189, "sla": 130, "size": 41203423}, {"finish_timestamp": 1406909357, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776444, "timestamp": 1406905200, "completed": "yes", "sla_timestamp": 1406913000, "eta": 120, "eta_timestamp": 1406912400, "sla_met": "MET", "runtime": 4157, "sla": 130, "size": 38032489}, {"finish_timestamp": 1406907066, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776443, "timestamp": 1406901600, "completed": "yes", "sla_timestamp": 1406909400, "eta": 120, "eta_timestamp": 1406908800, "sla_met": "MET", "runtime": 5466, "sla": 130, "size": 38420246}, {"finish_timestamp": 1406902259, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776442, "timestamp": 1406898000, "completed": "yes", "sla_timestamp": 1406905800, "eta": 120, "eta_timestamp": 1406905200, "sla_met": "MET", "runtime": 4259, "sla": 130, "size": 38587889}, {"finish_timestamp": 1406899520, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776441, "timestamp": 1406894400, "completed": "yes", "sla_timestamp": 1406902200, "eta": 120, "eta_timestamp": 1406901600, "sla_met": "MET", "runtime": 5120, "sla": 130, "size": 37105010}, {"finish_timestamp": 1406895735, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776440, "timestamp": 1406890800, "completed": "yes", "sla_timestamp": 1406898600, "eta": 120, "eta_timestamp": 1406898000, "sla_met": "MET", "runtime": 4935, "sla": 130, "size": 39323102}, {"finish_timestamp": 1406891505, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776439, "timestamp": 1406887200, "completed": "yes", "sla_timestamp": 1406895000, "eta": 120, "eta_timestamp": 1406894400, "sla_met": "MET", "runtime": 4305, "sla": 130, "size": 38138327}, {"finish_timestamp": 1406888289, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776438, "timestamp": 1406883600, "completed": "yes", "sla_timestamp": 1406891400, "eta": 120, "eta_timestamp": 1406890800, "sla_met": "MET", "runtime": 4689, "sla": 130, "size": 37308502}, {"finish_timestamp": 1406884274, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776437, "timestamp": 1406880000, "completed": "yes", "sla_timestamp": 1406887800, "eta": 120, "eta_timestamp": 1406887200, "sla_met": "MET", "runtime": 4274, "sla": 130, "size": 35840835}, {"finish_timestamp": 1406880688, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776436, "timestamp": 1406876400, "completed": "yes", "sla_timestamp": 1406884200, "eta": 120, "eta_timestamp": 1406883600, "sla_met": "MET", "runtime": 4288, "sla": 130, "size": 35055622}, {"finish_timestamp": 1406877076, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776435, "timestamp": 1406872800, "completed": "yes", "sla_timestamp": 1406880600, "eta": 120, "eta_timestamp": 1406880000, "sla_met": "MET", "runtime": 4276, "sla": 130, "size": 31185684}, {"finish_timestamp": 1406873508, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776434, "timestamp": 1406869200, "completed": "yes", "sla_timestamp": 1406877000, "eta": 120, "eta_timestamp": 1406876400, "sla_met": "MET", "runtime": 4308, "sla": 130, "size": 26996624}, {"finish_timestamp": 1406870295, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776433, "timestamp": 1406865600, "completed": "yes", "sla_timestamp": 1406873400, "eta": 120, "eta_timestamp": 1406872800, "sla_met": "MET", "runtime": 4695, "sla": 130, "size": 22037030}, {"finish_timestamp": 1406866107, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776432, "timestamp": 1406862000, "completed": "yes", "sla_timestamp": 1406869800, "eta": 120, "eta_timestamp": 1406869200, "sla_met": "MET", "runtime": 4107, "sla": 130, "size": 19958815}, {"finish_timestamp": 1406863010, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776431, "timestamp": 1406858400, "completed": "yes", "sla_timestamp": 1406866200, "eta": 120, "eta_timestamp": 1406865600, "sla_met": "MET", "runtime": 4610, "sla": 130, "size": 20475389}, {"finish_timestamp": 1406858922, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776430, "timestamp": 1406854800, "completed": "yes", "sla_timestamp": 1406862600, "eta": 120, "eta_timestamp": 1406862000, "sla_met": "MET", "runtime": 4122, "sla": 130, "size": 22851393}, {"finish_timestamp": 1406855337, "name": "RTBI-Hourly-NetworkFact", "run_id": 5776429, "timestamp": 1406851200, "completed": "yes", "sla_timestamp": 1406859000, "eta": 120, "eta_timestamp": 1406858400, "sla_met": "MET", "runtime": 4137, "sla": 130, "size": 26545296}, {"finish_timestamp": 1406851771, "name": "RTBI-Hourly-NetworkFact", "run_id": 5759184, "timestamp": 1406847600, "completed": "yes", "sla_timestamp": 1406855400, "eta": 120, "eta_timestamp": 1406854800, "sla_met": "MET", "runtime": 4171, "sla": 130, "size": 23502590}, {"finish_timestamp": 1406848869, "name": "RTBI-Hourly-NetworkFact", "run_id": 5759183, "timestamp": 1406844000, "completed": "yes", "sla_timestamp": 1406851800, "eta": 120, "eta_timestamp": 1406851200, "sla_met": "MET", "runtime": 4869, "sla": 130, "size": 30100591}];
+var plotData = [[]];
+var _freq = 60;
+var fSize = 0;
+var dUnit = 'MB';
+var sorted = _data.map(function (o) { return o.size }).sort(function(a,b) { return parseInt(a) - parseInt(b) });
+var maxSize = sorted[sorted.length - 1];
+var sizeMap = {
+    KB: 1024,
+    MB: 1024*1024,
+    GB: 1024*1024*1024
+};
+if (maxSize > sizeMap.GB) dUnit = 'GB';
+if (maxSize < sizeMap.MB) dUnit = 'KB';
+
+for (var e in _data) {
+    fSize = parseInt(_data[e].size);
+    plotData[0].push([_data[e].timestamp * 1000,
+        parseFloat(fSize/sizeMap[dUnit]).toFixed(2)]);
+}
+
+
+var options = {
+    xaxis: {
+        mode: "time",
+        tickLength: 5
+    },
+    series: {
+        lines: {
+            show: true
+        },
+        points: {
+            show: true
+        }
+    },
+    grid: {
+        hoverable: true,
+        clickable: true
+    },
+    selection: {
+        mode: "x"
+    },
+};
+var plot = $.plot("#graph-1", [
+    { data: plotData[0], label: "feed size ("+dUnit+")"}],
+    options);
+
+var overview = $.plot("#overview", plotData, {
+    series: {
+        lines: {
+            shows: true,
+            lineWidth: 1
+        },
+        shadowSize: 4
+    },
+    xaxis: {
+        mode: "time"
+    },
+    yaxis: {
+        ticks: [],
+        autoscaleMargin: 0.1
+    },
+    selection: {
+        mode: "x"
+    }
+});
+
+
+function showToolTip(x, y, contents) {
+    $("<div id='tooltip'>" + contents + "</div>").css({
+        position: "absolute",
+        display: "none",
+        top: y + 5,
+        left: x + 5,
+        border: "1px solid #fdd",
+        padding: "2px",
+        "background-color": "#fee",
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
+}
+
+$("#graph-1").bind("plotselected", function (event, ranges) {
+// do the zooming
+plot = $.plot("#graph-1", [
+    {data: plotData[0], label: "feed size("+dUnit+")"},
+    ], $.extend(true, {}, options, {
+        xaxis: {
+            min: ranges.xaxis.from,
+            max: ranges.xaxis.to
+        }
+    }));
+// don't fire event on the overview to prevent eternal loop
+overview.setSelection(ranges, true);
+});
+$("#overview").bind("plotselected", function (event, ranges) {
+    plot.setSelection(ranges);
+});
+
+// set the last 12 hours 
+var _lastIndex = plotData.length - 1;
+var _endRange = plotData[0][_lastIndex][0];
+// var _startRange = (_endRange/1000 - 3600*12) * 1000;
+var _startRange = plotData[0][0][0];;
+
+plot.setSelection({xaxis: {from: _startRange, to:_endRange}});
+
+var previousPoint = null;
+
+
+$('#graph-1').bind("plothover", function (event, pos, item) {
+    if (item) {
+        if (previousPoint != item.dataIndex) {
+            previousPoint = item.dataIndex;
+            $("#tooltip").remove();
+            var x = new Date(0),
+            y = item.datapoint[1].toFixed(2);
+            x.setUTCSeconds(item.datapoint[0].toFixed(2)/1000);
+            var customX = x.getUTCMonth() + 1+ "/" + x.getUTCDate() + " " + x.getUTCHours() + ":" + x.getUTCMinutes();
+            showToolTip(item.pageX, item.pageY,
+                "[" + item.series.label +  "] " + customX + " = " + y);
+        } else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    }
+});
+</script>
+{% endblock child_js %}
+

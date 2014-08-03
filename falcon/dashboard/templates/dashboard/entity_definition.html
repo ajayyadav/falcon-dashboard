@@ -2,7 +2,13 @@
   <div class="panel-heading">
     Definition
     <span class="pull-right">
-      <a href="{% url 'edit_entity' type name %}"> Edit </a>
+      {% if type == 'process' %}
+        <a href="{% url 'edit_process' name %}"> Edit </a>
+      {% elif type == 'feed' %}
+        <a href="{% url 'edit_feed' name %}"> Edit </a>
+      {% elif type == 'cluster' %}
+        <a href="{% url 'edit_cluster' name %}"> Edit </a>
+      {% endif %}
     </span>
   </div>
 

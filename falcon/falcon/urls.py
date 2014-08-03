@@ -6,4 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^monitoring/', include('monitoring.urls')),
+    
 )

@@ -13,7 +13,8 @@ from api.views import e_search, e_definition, e_instances, e_dependency
 
 
 # search for the entity containing this text (case insensitive)
-def search_entity(request, template_name='dashboard/search.html'):
+def dashboard_index(request, template_name='dashboard/dashboard_index.html'):
+    current_app = 'dashboard'
     type = request.GET.get('type')
     query = request.GET.get('name')
     # dictionary containing entity name and entity type
@@ -26,6 +27,7 @@ def search_entity(request, template_name='dashboard/search.html'):
 
 def entity_details(request, type, name, template_name='dashboard/entity_details.html'):
     """Show details of the entity with given type and name"""
+    current_app='dashboard'
     entity_definition = e_definition(type, name)
     dependencies = e_dependency(type,name)
     instances = e_instances(type,name) # return last 5 instances of this process
