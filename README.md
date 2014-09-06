@@ -11,7 +11,7 @@ Getting Started
              git clone git@github.com:ajayyadav/falcon-web.git
 
 2. cd to project's diretory
-      1. <code>cd falcon-web/falcon </code>
+      1. <code>cd falcon-web </code>
 
 3. Install pip ( you may have to use sudo )
       1. download get-pip.py from https://bootstrap.pypa.io/get-pip.py
@@ -19,7 +19,10 @@ Getting Started
 
 4. Install requirements: <code>pip install -r requirements.txt </code>
 
-5. Start the server: <code>python manage.py runserver</code>
+
+5. Start the server: 
+      1. <code>cd falcon </code>
+      2. <code>python manage.py runserver</code>
 
 6. You can view following urls as of now
       1. http://localhost:8000/dashboard/
